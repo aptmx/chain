@@ -11,10 +11,9 @@ pragma solidity ^0.8.0;
 
 contract Bank{
     mapping(address => uint256) public record; //用户地址与用户余额
-    uint public totalAmount; //银行存入的总余额
     address payable public admin; //银行管理员
 
-    uint public balance; // 合约地址的余额
+    uint public balance; // 合约地址的总余额
     address[3] public addrList; //金额前三的地址
 
 
@@ -29,16 +28,20 @@ contract Bank{
         require(msg.value>0, "amount must be great than zero");
 
         record[msg.sender] += amount;
-        totalAmount += amount;
+        balance += amount;
 
         // 数组存储前三金额的地址
         for(uint i=0; i<3; i++){
             if (record[msg.sender] >= record[addrList[i]]){
-                for (uint j=2-i; j>0; j--){
-                    addrList[j]=addrList[j-1];
+                if(msg.sender == addrList[i]){
+                    return;
+                }else {
+                    for (uint j=2-i; j>0; j--){
+                        addrList[j]=addrList[j-1];
+                    }
+                    addrList[i]=msg.sender;
+                    return;
                 }
-                addrList[i]=msg.sender;
-                return;
             }
         }
     }
@@ -53,7 +56,8 @@ contract Bank{
 
     // 允许外部地址转钱进银行合约里
     receive() external payable {
-        balance += msg.value;
+        uint amount = msg.value;
+        save(amount);
     }
 
 }
