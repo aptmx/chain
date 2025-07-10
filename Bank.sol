@@ -33,7 +33,7 @@ contract Bank{
         // 数组存储前三金额的地址
         for(uint i=0; i<3; i++){
             if (record[msg.sender] >= record[addrList[i]]){
-                if(msg.sender == addrList[i]){
+                if(msg.sender == addrList[i]){ //地址相同
                     return;
                 }else {
                     for (uint j=2-i; j>0; j--){
@@ -50,6 +50,7 @@ contract Bank{
     function withdraw (uint amount, address payable addr) public payable {
         require(addr == admin, "you are not authorized"); //只能是admin
         require(msg.value == 0, "not save any money"); //没有存钱
+        require(amount<=balance, "balance not enough"); //取款金额小于总余额 
         payable(addr).transfer(amount);
         balance -= amount;
     }
