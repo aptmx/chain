@@ -12,8 +12,7 @@ pragma solidity ^0.8.0;
 */
 
 
-import "./token.sol";
-
+import "https://github.com/aptmx/chain/blob/main/token.sol";
 
 
 contract TokenBank{
