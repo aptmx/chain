@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 interface ITokenReceive {
     function tokensReceived(address from, uint256 amount) external;
+    function tokensReceived(address from, uint256 amount, uint256 tokenId) external;
 }
 
 contract BaseERC20 {
@@ -89,4 +90,14 @@ contract BaseERC20 {
     function isContract(address _to) internal view returns (bool){
         return _to.code.length > 0;
     } 
+
+    //扩展用户回调买NFT
+     function transferWithCallback(address _to, uint256 price, uint256 tokenId) public {
+        require(transfer(_to, price), "transfer failed");
+
+        if(isContract(_to)){
+           ITokenReceive(_to).tokensReceived(msg.sender, price, tokenId);
+        }
+    }
+    
 }
