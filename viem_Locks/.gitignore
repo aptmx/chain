@@ -1,0 +1,20 @@
+# Node dependencies
+node_modules/
+
+# dotenv (私钥、RPC等敏感信息)
+.env
+
+# TypeScript build cache
+dist/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# Optional: editor-specific
+.vscode/
+.idea/
