@@ -9,7 +9,6 @@ dist/
 *.tsbuildinfo
 
 # Logs
-*.log
 npm-debug.log*
 
 # OS files
