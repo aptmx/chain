@@ -1,0 +1,21 @@
+主要优化点：
+使用 immutable 关键字： 
+    将 nft 和 paymentToken 声明为 immutable，这样可以节省 gas，因为这些值在构造函数后不会改变
+使用 storage 指针而不是 memory：
+    在 buyNFT、cancelListing、tokensReceivedwithId 和 getListing 函数中使用 storage 指针
+避免将数据复制到内存，直接操作存储
+优化结构体初始化：
+    使用更简洁的结构体初始化语法：Listing(msg.sender, price) 而不是命名参数
+提前清除存储：
+    在 buyNFT 函数中，在转账前清除 listings[tokenId]，这有助于防止重入攻击并优化 gas 使用
+移除不必要的变量：
+    在 buyNFT 中直接使用 require 而不是先存储 success 变量
+优化变量使用：
+    在需要多次使用的地方，将 item.price 和 item.seller 存储到局部变量中
+
+Gas 节省效果：
+immutable 变量：每个变量节省约 2000 gas
+storage 指针：每次访问节省约 100 gas
+提前清除存储：避免重入攻击的同时优化 gas
+简化结构体初始化：节省少量 gas
+这些优化可以显著降低合约的 gas 消耗，特别是在高频交易场景下效果更明显。
