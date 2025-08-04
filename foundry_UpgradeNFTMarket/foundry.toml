@@ -1,0 +1,16 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+
+remappings = [
+  "@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/",
+  "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"]
+
+
+[rpc_endpoints]
+Sepolia = "https://aged-light-bird.ethereum-sepolia.quiknode.pro/ab43b23031d68fcfb1ea47eb2c4eb031b3592bde"
+Local_URL = "http://127.0.0.1:8545"
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
