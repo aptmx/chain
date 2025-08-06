@@ -1,0 +1,19 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+fs_permissions = [
+{ access = "write", path = "./deployments" }
+]
+
+remappings = [
+    "forge-std/=lib/forge-std/src/",
+    "@chainlink/automation/=lib/chainlink-automation/contracts/",
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"
+]
+
+[rpc_endpoints]
+Sepolia = "https://ethereum-sepolia-rpc.publicnode.com"
+Local_URL = "http://127.0.0.1:8545"
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
